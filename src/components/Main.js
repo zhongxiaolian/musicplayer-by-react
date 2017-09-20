@@ -21,12 +21,13 @@ class AppComponent extends React.Component {
   }
   playMusic(item){
     // console.log(item.file);
-    let musicUrl = require("../songs/"+item.file);
-    console.log(33333);
-    console.log(musicUrl);
+    // let musicUrl = require("../songs/"+item.file);
+    // let musicUrl = require(item.file);
+    // console.log(33333);
+    // console.log(musicUrl);
     $("#player").jPlayer("setMedia",{
       // mp3 : "../songs/"+item.file
-      mp3 : musicUrl
+      mp3 : item.file
     }).jPlayer("play");
     this.setState({
       currentMusicItem : item
