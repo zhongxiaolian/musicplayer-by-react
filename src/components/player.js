@@ -104,7 +104,7 @@ class Player extends React.Component{
     let coverUrl = require("../images/"+this.props.currentMusicItem.cover);
     return (
       <div className="player-page">
-          <h1 className="caption"><div><Link to="/list">我的私人播放列表 &gt;</Link></div></h1>
+          <h1 className="caption"><div><Link to="/list">我的私人歌单 &gt;</Link></div></h1>
           <div className="mt20 row">
             <div className="controll-wrapper">
               <h2 className="music-title">{this.props.currentMusicItem.title}</h2>
@@ -145,9 +145,9 @@ class Player extends React.Component{
                 </div>
               </div>
             </div>
-            <div className="-col-auto cover">
-              <img src={coverUrl} alt={this.props.currentMusicItem.title}/>
-            </div>
+              <div className={`-col-auto cover ${this.state.isPlay ? 'running ':' pause'}`} ref="cover">
+                <img src={coverUrl} alt={this.props.currentMusicItem.title}/>
+              </div>
           </div>
       </div>
     );

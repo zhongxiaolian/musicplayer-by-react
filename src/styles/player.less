@@ -2,7 +2,7 @@
 	width: 700px;
 	margin: auto;
 	margin-top: 120px;
-
+  overflow: hidden;
 	.caption {
 		font-size: 16px;
 		color: rgb(47, 152, 66);
@@ -11,12 +11,13 @@
 	.cover {
 		width: 180px;
 		height: 180px;
-		margin-left: 20px;
-
+    margin-left: 20px;
+    overflow: hidden;
+    border-radius: 50%;
+    animation: cycle 15s linear infinite;
 		img {
-			width: 180px;
 			height: 180px;
-			border-radius: 50%;
+      margin-left: -40px;
 		}
 	}
 	.volume-container {
@@ -62,4 +63,18 @@
     	width: 60px;
     	display: inline-block;
     }
+}
+@keyframes cycle {
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+.running{
+  animation-play-state:running !important;
+}
+.pause{
+  animation-play-state:paused !important;
 }
