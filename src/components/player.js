@@ -21,6 +21,8 @@ class Player extends React.Component{
   }
 
   componentDidMount(){
+    let _this = this;
+
     //监听歌曲播放的时间
     $("#player").bind($.jPlayer.event.timeupdate,(e)=>{
       //歌曲播放的总时间
@@ -34,11 +36,34 @@ class Player extends React.Component{
         leftTime : this.formatTime(duration * (1-e.jPlayer.status.currentPercentAbsolute/100))
       });
     })
+
+    // 全局绑定键盘事件
+    document.addEventListener("keydown",function(e){
+      e.preventDefault();
+      if(e.keyCode==32){
+        console.log("空格");
+        if(_this.state.isPlay){
+          $("#player").jPlayer("pause");
+        }else{
+          $("#player").jPlayer("play");
+        }
+        _this.setState({
+          isPlay : !_this.state.isPlay
+        })
+      }else if(e.keyCode==38){
+        console.log("上")
+        _this.playPrev();
+      }else if(e.keyCode==40){
+        console.log("下");
+        _this.playNext();
+      }
+    })
   }
 
 
   componentWillUnmount(){
     $("#player").unbind($.jPlayer.event.timeupdate);
+    document.removeEventListener("keydown");
   }
 
   //通过回调函数接收progress子组件传递的值,实现点击progressbar控制播放进度
