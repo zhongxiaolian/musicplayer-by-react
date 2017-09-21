@@ -64,6 +64,21 @@
     	display: inline-block;
     }
 }
+
+@media screen and (max-width:768px){
+  .player-page{
+    width:80%;
+    margin-top: 30px;
+    .music-title{
+      font-size: 20px;
+    }
+    .cover{
+      display: none !important;
+    }
+  }
+}
+
+// cover旋转的动画
 @keyframes cycle {
   0%{
     transform: rotate(0deg);
