@@ -9,7 +9,6 @@
 const path = require('path');
 const srcPath = path.join(__dirname, '/../src');
 const dfltPort = 8000;
-
 /**
  * Get the default modules object for webpack
  * @return {Object}
@@ -27,6 +26,7 @@ function getDefaultModules() {
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader'
+        // loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
       },
       {
         test: /\.sass/,
@@ -39,6 +39,7 @@ function getDefaultModules() {
       {
         test: /\.less/,
         loader: 'style-loader!css-loader!less-loader'
+        // loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader!less-loader' })
       },
       {
         test: /\.style/,

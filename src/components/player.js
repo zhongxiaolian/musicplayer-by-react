@@ -63,7 +63,9 @@ class Player extends React.Component{
 
   componentWillUnmount(){
     $("#player").unbind($.jPlayer.event.timeupdate);
-    document.removeEventListener("keydown");
+    document.removeEventListener("keydown",function(){
+
+    });
   }
 
   //通过回调函数接收progress子组件传递的值,实现点击progressbar控制播放进度
