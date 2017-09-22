@@ -8,6 +8,7 @@ import Pubsub from 'pubsub-js';
 import notification  from 'antd/lib/notification';
 import 'antd/lib/notification/style/index.less';
 let duration = null;
+let lastRunTime = new Date();
 class Player extends React.Component{
 
   constructor(props){
@@ -84,14 +85,22 @@ class Player extends React.Component{
 
   //控制播放，暂停
   play(){
-    if(this.state.isPlay){
-      $("#player").jPlayer("pause");
+    let lateRunTime = new Date();
+    // 添加保护延迟，防止用户切换操作过快
+    if(lateRunTime-lastRunTime<50){
+      return
     }else{
-      $("#player").jPlayer("play");
+      if(this.state.isPlay){
+        $("#player").jPlayer("pause");
+      }else{
+        $("#player").jPlayer("play");
+      }
+      this.setState({
+        isPlay : !this.state.isPlay
+      })
     }
-    this.setState({
-      isPlay : !this.state.isPlay
-    })
+
+    lastRunTime = new Date();
   }
   playPrev(){
     Pubsub.publish("PLAY_PREV");

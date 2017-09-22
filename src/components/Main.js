@@ -9,7 +9,7 @@ import MusicList from './musicList.js';
 import {MUSIC_LIST} from '../config/songConfig.js';
 import {Router,IndexRoute,Link,Route,hashHistory} from 'react-router';
 import Pubsub from 'pubsub-js';
-
+let lastRunTime = new Date();
 class AppComponent extends React.Component {
   constructor(props){
     super(props);
@@ -20,14 +20,15 @@ class AppComponent extends React.Component {
     };
   }
   playMusic(item){
-    $("#player").jPlayer("setMedia",{
-      mp3 : item.file
-    }).jPlayer("play");
-    this.setState({
-      currentMusicItem : item
-    });
+      $("#player").jPlayer("setMedia",{
+        mp3 : item.file
+      }).jPlayer("play");
+      this.setState({
+        currentMusicItem : item
+      });
   }
   playNext(type="next"){
+    let lateRunTime = new Date();
     let nextIndex = null;
     let index = this.findMusicIndex(this.state.currentMusicItem);
     let musicListLength = this.state.musicList.length;
@@ -36,7 +37,14 @@ class AppComponent extends React.Component {
     }else{
       nextIndex = (index-1+musicListLength)%musicListLength;
     }
-    this.playMusic(this.state.musicList[nextIndex]);
+    //添加保护延迟，防止用户切换操作过快
+    if(lateRunTime-lastRunTime<1000){
+      return
+    }else{
+      this.playMusic(this.state.musicList[nextIndex]);
+    }
+    lastRunTime = new Date();
+
   }
   findMusicIndex(item){
     return this.state.musicList.indexOf(item);
