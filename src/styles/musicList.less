@@ -1,7 +1,10 @@
 .component-musiclist{
-  padding-top: 71px;
   display: flex;
   font-size: 16px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding-top: 71px;
   .music-left{
     display: flex;
     width:10%;
@@ -16,13 +19,14 @@
   }
   .music-right{
     flex: auto;
-
+    height: 100%;
+    overflow: scroll;
   }
 }
 @media screen and(max-width:768px){
   .component-musiclist{
-    padding-top: 51px;
     font-size: 12px;
+    padding-top: 51px;
     .music-left{
       width: 20%;
       a{

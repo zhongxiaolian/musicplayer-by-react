@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/reset.less";
 import "../styles/common.less";
+import "../styles/main.less";
 import $ from "jquery";
 import Header from "./header.js";
 import Player from "./player.js";
@@ -148,8 +149,8 @@ class AppComponent extends React.Component {
 
   render() {
     return (
-      <div>
-        <Header/>
+      <div className="component-main">
+        <Header ref="header"/>
         {/* <Player currentMusicItem={this.state.currentMusicItem}/> */}
         {/* <MusicList musicList={this.state.musicList} currentMusicItem={this.state.currentMusicItem}/> */}
         {/* 这种方式不会把参数传递给子组件 */}
