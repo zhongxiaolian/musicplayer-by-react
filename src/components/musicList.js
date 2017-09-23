@@ -1,6 +1,6 @@
 import React from 'react';
 import MusicListItem from './musicListItem.js';
-
+import '../styles/musicList.less';
 class MusicList extends React.Component{
   render(){
     let _this = this;
@@ -8,7 +8,7 @@ class MusicList extends React.Component{
       return <MusicListItem musicItem={item} focus={item == _this.props.currentMusicItem} key={item.id}/>
     });
     return (
-      <ul>
+      <ul className="component-musiclist">
         {listEle}
       </ul>
     )

@@ -103,9 +103,15 @@ class Player extends React.Component{
     lastRunTime = new Date();
   }
   playPrev(){
+    this.setState({
+      isPlay : true
+    });
     Pubsub.publish("PLAY_PREV");
   }
   playNext(){
+    this.setState({
+      isPlay : true
+    })
     Pubsub.publish("PLAY_NEXT");
   }
   formatTime(time){
