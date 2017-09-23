@@ -1,5 +1,5 @@
-import React from 'react';
-import '../styles/progress.less';
+import React from "react";
+import "../styles/progress.less";
 class Progress extends React.Component{
   changeProgress(e){
     let progressBar =  this.refs.progressBar;

@@ -1,12 +1,12 @@
-import React from 'react';
-import $ from 'jquery';
-import jPlayer from 'jplayer';
-import Progress from '../components/progress.js';
-import '../styles/player.less';
-import {Link} from 'react-router';
-import Pubsub from 'pubsub-js';
-import notification  from 'antd/lib/notification';
-import 'antd/lib/notification/style/index.less';
+import React from "react";
+import $ from "jquery";
+import jPlayer from "jplayer";
+import Progress from "../components/progress.js";
+import "../styles/player.less";
+import {Link} from "react-router";
+import Pubsub from "pubsub-js";
+import notification  from "antd/lib/notification";
+import "antd/lib/notification/style/index.less";
 let duration = null;
 let lastRunTime = new Date();
 class Player extends React.Component{
@@ -42,7 +42,6 @@ class Player extends React.Component{
     document.addEventListener("keydown",function(e){
       e.preventDefault();
       if(e.keyCode==32){
-        console.log("空格");
         if(_this.state.isPlay){
           $("#player").jPlayer("pause");
         }else{
@@ -52,10 +51,8 @@ class Player extends React.Component{
           isPlay : !_this.state.isPlay
         })
       }else if(e.keyCode==38){
-        console.log("上")
         _this.playPrev();
       }else if(e.keyCode==40){
-        console.log("下");
         _this.playNext();
       }
     })
@@ -125,20 +122,20 @@ class Player extends React.Component{
     if(this.props.repeatType == "once"){
       Pubsub.publish("CHANGE_REPEATTYPE","random");
       notification.open({
-        message: '播放类型',
-        description: '随机播放',
+        message: "播放类型",
+        description: "随机播放"
       });
     }else if(this.props.repeatType == "cycle"){
       Pubsub.publish("CHANGE_REPEATTYPE","once");
       notification.open({
-        message: '播放类型',
-        description: '单曲播放',
+        message: "播放类型",
+        description: "单曲播放"
       });
     }else{
       Pubsub.publish("CHANGE_REPEATTYPE","cycle");
       notification.open({
-        message: '播放类型',
-        description: '循环播放',
+        message: "播放类型",
+        description: "循环播放"
       });
     }
   }
@@ -160,13 +157,13 @@ class Player extends React.Component{
                     <Progress
                       progress={this.state.volume}
                       onProgressChange={this.volumeChangeHandler.bind(this)}
-                      barColor='#aaa'
+                      barColor="#aaa"
                     >
                     </Progress>
                   </div>
                 </div>
               </div>
-              <div style={{height: 10, lineHeight: '10px'}}>
+              <div style={{height: 10, lineHeight: "10px"}}>
                 {/* 播放进度条组件 */}
                 <Progress
                   cn="mt20"
@@ -179,7 +176,7 @@ class Player extends React.Component{
                 <div>
                   {/* 播放，暂停，上一曲，下一曲控制 */}
                   <i className="icon prev" onClick={this.playPrev.bind(this)}></i>
-                  <i className={`icon ml20 ${this.state.isPlay ? 'pause' : 'play'}`} onClick={this.play.bind(this)}></i>
+                  <i className={`icon ml20 ${this.state.isPlay ? "pause" : "play"}`} onClick={this.play.bind(this)}></i>
                   <i className="icon next ml20" onClick={this.playNext.bind(this)}></i>
                 </div>
                 <div className="-col-auto">
@@ -187,7 +184,7 @@ class Player extends React.Component{
                 </div>
               </div>
             </div>
-              <div className={`-col-auto cover ${this.state.isPlay ? 'running ':' pause'}`} ref="cover">
+              <div className={`-col-auto cover ${this.state.isPlay ? "running ":" pause"}`} ref="cover">
                 <img src={coverUrl} alt={this.props.currentMusicItem.title}/>
               </div>
           </div>

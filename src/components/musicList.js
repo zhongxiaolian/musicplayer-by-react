@@ -1,16 +1,21 @@
-import React from 'react';
-import MusicListItem from './musicListItem.js';
-import '../styles/musicList.less';
+import React from "react";
+
+import "../styles/musicList.less";
+import {Link} from "react-router";
+
 class MusicList extends React.Component{
   render(){
-    let _this = this;
-    let listEle = this.props.musicList.map(function(item){
-      return <MusicListItem musicItem={item} focus={item == _this.props.currentMusicItem} key={item.id}/>
-    });
     return (
-      <ul className="component-musiclist">
-        {listEle}
-      </ul>
+      <div className="component-musiclist">
+        <div className="music-left">
+          <Link to="/list/stefanie">孙燕姿</Link>
+          <Link to="/list/europe">欧美</Link>
+          <Link to="/">返回</Link>
+        </div>
+        <div className="music-right">
+          {this.props.children}
+        </div>
+      </div>
     )
   }
 }

@@ -1,8 +1,36 @@
 .component-musiclist{
   padding-top: 71px;
+  display: flex;
+  font-size: 16px;
+  .music-left{
+    display: flex;
+    width:10%;
+    height: 100%;
+    flex-direction: column;
+
+    a{
+      padding-left: 30px;
+      line-height: 2rem;
+
+    }
+  }
+  .music-right{
+    flex: auto;
+
+  }
 }
 @media screen and(max-width:768px){
   .component-musiclist{
     padding-top: 51px;
+    font-size: 12px;
+    .music-left{
+      width: 20%;
+      a{
+        padding-left: 10px;
+      }
+    }
+    .music-right{
+
+    }
   }
 }

@@ -1,14 +1,14 @@
-import React from 'react';
-import '../styles/reset.less';
-import '../styles/common.less';
-import $ from 'jquery';
-import jPlayer from 'jplayer';
-import Header from './header.js';
-import Player from './player.js';
-import MusicList from './musicList.js';
-import {MUSIC_LIST} from '../config/songConfig.js';
-import {Router,IndexRoute,Link,Route,hashHistory} from 'react-router';
-import Pubsub from 'pubsub-js';
+import React from "react";
+import "../styles/reset.less";
+import "../styles/common.less";
+import $ from "jquery";
+import Header from "./header.js";
+import Player from "./player.js";
+import MusicList from "./musicList.js";
+import MusicListContent from "./musicListContent.js";
+import {MUSIC_LIST} from "../config/songConfig.js";
+import {Router,IndexRoute,Route,hashHistory} from "react-router";
+import Pubsub from "pubsub-js";
 let lastRunTime = new Date();
 class AppComponent extends React.Component {
   constructor(props){
@@ -16,7 +16,7 @@ class AppComponent extends React.Component {
     this.state = {
       musicList : MUSIC_LIST,
       currentMusicItem : MUSIC_LIST[0],
-      repeatType : 'cycle'
+      repeatType : "cycle"
     };
   }
   playMusic(item){
@@ -107,17 +107,16 @@ class AppComponent extends React.Component {
       _this.playMusic(item);
     })
     Pubsub.subscribe("DELETE_MUSIC",(message,item)=>{
-      console.log(_this.state)
       _this.setState({
         musicList :_this.state.musicList.filter((musicitem)=>{
           return item !==musicitem;
         })
       })
     })
-    Pubsub.subscribe("PLAY_PREV",(message,item)=>{
+    Pubsub.subscribe("PLAY_PREV",()=>{
       _this.playNext("prev");
     })
-    Pubsub.subscribe("PLAY_NEXT",(message,item)=>{
+    Pubsub.subscribe("PLAY_NEXT",()=>{
       _this.playNext("next");
     })
     Pubsub.subscribe("CHANGE_REPEATTYPE",(message,type)=>{
@@ -140,6 +139,12 @@ class AppComponent extends React.Component {
     //解绑
     $("#player").unbind($.jPlayer.event.ended);
   }
+  // 通过context向底层组件传值
+  getChildContext(){
+    return {
+      currentMusicItem : this.state.currentMusicItem
+    }
+  }
 
   render() {
     return (
@@ -155,6 +160,10 @@ class AppComponent extends React.Component {
     );
   }
 }
+// 通过context向底层组件传值
+AppComponent.childContextTypes={
+  currentMusicItem : React.PropTypes.object
+}
 
 class Root extends React.Component{
   render(){
@@ -162,7 +171,10 @@ class Root extends React.Component{
       <Router history={hashHistory}>
         <Route path="/" component={AppComponent}>
             <IndexRoute component={Player}></IndexRoute>
-            <Route path="/list" component={MusicList}></Route>
+            <Route path="/list" component={MusicList}>
+              <IndexRoute component={MusicListContent}></IndexRoute>
+              <Route path="/list/:musictype" component={MusicListContent}></Route>
+            </Route>
         </Route>
       </Router>
     )
