@@ -7,7 +7,7 @@ export default class MusicListContent extends Component{
     super();
     this.state={
       musicType : "stefanie",
-      musicList : null
+      musicList : MusicListService.getMusicList("stefanie")
     }
   }
   componentWillReceiveProps(props){
@@ -19,12 +19,6 @@ export default class MusicListContent extends Component{
       });
     }
   }
-  componentDidMount(){
-    let newMusicList = MusicListService.getMusicList(this.state.musicType);
-    this.setState({
-      musicList : newMusicList
-    });
-  }
   // 通过回调函数，点击删除按钮删除条目
   deleteMusic(item){
     let list = this.state.musicList.filter(function(i){
@@ -34,6 +28,36 @@ export default class MusicListContent extends Component{
       musicList : list
     });
   }
+
+  componentDidMount(){
+    let musicContent = this.refs.musicContent;
+    let musicContentHeight = musicContent.offsetHeight;
+    let musicContentParentHeight = musicContent.parentElement.offsetHeight;
+    let startY = 0;
+    let moveY = 0;
+    let maxDistance = 200;
+    let totalMove = 0;
+    musicContent.addEventListener("touchstart",function(e){
+      startY = e.touches[0].clientY;
+    })
+    musicContent.addEventListener("touchmove",function(e){
+      moveY = e.touches[0].clientY-startY;
+      console.log(moveY);
+      console.log(totalMove + moveY);
+      // if(totalMove+moveY>(musicContentHeight-musicContentParentHeight)+maxDistance){
+      //   totalMove = (musicContentHeight-musicContentParentHeight)+maxDistance;
+      // }else if(totalMove+moveY<-(maxDistance)){
+      //   totalMove = -(maxDistance);
+      // }else{
+      // }
+      musicContent.style.transform = "translateY("+(totalMove + moveY)+"px)";
+    })
+    musicContent.addEventListener("touchend",function(e){
+      totalMove = totalMove + moveY;
+
+    })
+  }
+
   render(){
     var _this = this;
     let listEle = null;
@@ -45,7 +69,7 @@ export default class MusicListContent extends Component{
       });
     }
     return (
-        <ul>
+        <ul ref="musicContent">
           {listEle}
         </ul>
     );
