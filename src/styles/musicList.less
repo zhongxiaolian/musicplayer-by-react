@@ -1,3 +1,23 @@
+// 字体图标开始
+@font-face {
+  font-family: 'iconfont';
+  src: url('../fonts/iconfont.eot');
+  src: url('../fonts/iconfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/iconfont.woff') format('woff'),
+  url('../fonts/iconfont.ttf') format('truetype'),
+  url('../fonts/iconfont.svg#iconfont') format('svg');
+}
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-music:before { content: "\e601"; }
+// 字体图标结束
+
+
 .component-musiclist{
   display: flex;
   font-size: 16px;
@@ -12,9 +32,24 @@
     flex-direction: column;
 
     a{
-      padding-left: 30px;
+      padding-left: 40px;
       line-height: 2rem;
-
+      font-family: "iconfont";
+      position: relative;
+      font-style:normal;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      &:not(:last-of-type):before{
+        position: absolute;
+        left: 15px;
+        top: 0;
+        font-weight:600;
+        font-size: 22px;
+        content : "\e601";
+      }
+      &.current{
+        color: #2f9842;
+      }
     }
   }
   .music-right{

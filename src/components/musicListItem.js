@@ -8,7 +8,8 @@ class MusicListItem extends React.Component{
   }
   deleteMusic(item,e){
     e.stopPropagation();
-    Pubsub.publish("DELETE_MUSIC",item);
+    // Pubsub.publish("DELETE_MUSIC",item);
+    this.props.delete && this.props.delete(item);
   }
   render(){
     let musicItem = this.props.musicItem;

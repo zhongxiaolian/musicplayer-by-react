@@ -11,6 +11,7 @@ import {MUSIC_LIST} from "../config/songConfig.js";
 import {Router,IndexRoute,Route,hashHistory} from "react-router";
 import Pubsub from "pubsub-js";
 let lastRunTime = new Date();
+let interval = null;
 class AppComponent extends React.Component {
   constructor(props){
     super(props);
@@ -93,8 +94,21 @@ class AppComponent extends React.Component {
   }
   // ==================控制播放类型结束====================
 
+  // 滚动标题
+  rollTitle(){
+    let title = document.title;
+    let step = 0;
+    interval = setInterval(function(){
+      document.title = title.substring(step)+title.substring(0,step);
+      step++;
+      if(step==title.length-1){
+        step=0;
+      }
+    },1000);
+  }
 
   componentDidMount(){
+    this.rollTitle();
     let _this = this;
     //组件加载完毕播放歌曲，放在根节点这样切换组件歌曲不会停止播放
     $("#player").jPlayer({
@@ -106,13 +120,6 @@ class AppComponent extends React.Component {
     // 事件订阅，接收事件
     Pubsub.subscribe("PLAY_MUSIC",(message,item)=>{
       _this.playMusic(item);
-    })
-    Pubsub.subscribe("DELETE_MUSIC",(message,item)=>{
-      _this.setState({
-        musicList :_this.state.musicList.filter((musicitem)=>{
-          return item !==musicitem;
-        })
-      })
     })
     Pubsub.subscribe("PLAY_PREV",()=>{
       _this.playNext("prev");
@@ -128,12 +135,12 @@ class AppComponent extends React.Component {
     $("#player").bind($.jPlayer.event.ended,function(e){
       _this.playNext();
     });
+
   }
 
   componentWillUnmount(){
     //事件订阅，解绑
     Pubsub.unsubscribe("PLAY_MUSIC");
-    Pubsub.unsubscribe("DELETE_MUSIC");
     Pubsub.unsubscribe("PLAY_PREV");
     Pubsub.unsubscribe("PLAY_NEXT");
     Pubsub.unsubscribe("CHANGE_REPEATTYPE");
@@ -148,6 +155,10 @@ class AppComponent extends React.Component {
   }
 
   render() {
+    // if(interval){
+    //   clearInterval(interval);
+    // }
+    // this.rollTitle();
     return (
       <div className="component-main">
         <Header ref="header"/>

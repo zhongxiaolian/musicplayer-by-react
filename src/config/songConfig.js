@@ -151,5 +151,21 @@ export const MUSIC_LIST = [
     file:"http://other.web.ri01.sycdn.kuwo.cn/resource/n2/88/34/3059849706.mp3",
     cover : "swift.jpg",
     type:"europe"
+  },
+  {
+    id:20,
+    title:"钟无艳",
+    artist:"谢安琪",
+    file:"http://other.web.ra01.sycdn.kuwo.cn/resource/n1/128/37/81/3587394568.mp3",
+    cover : "swift.jpg",
+    type:"yueyu"
+  },
+  {
+    id:21,
+    title:"风的季节",
+    artist:"Soler",
+    file:"http://other.web.ri01.sycdn.kuwo.cn/resource/n3/10/8/3691863218.mp3",
+    cover : "swift.jpg",
+    type:"yueyu"
   }
 ];

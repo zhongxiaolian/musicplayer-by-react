@@ -46,11 +46,11 @@ function getDefaultModules() {
         loader: 'style-loader!css-loader!style-loader'
       },
       {
-        test: /\.(png|jpg|gif|woff|woff2)$/,
+        test: /\.(png|jpg|gif)$/,
         loader: 'url-loader?limit=8192'
       },
       {
-        test: /\.(mp3|mp4|ogg|svg)$/,
+        test: /\.(mp3|mp4|ogg|svg|woff|woff2|eot|ttf)$/,
         loader: 'file-loader'
       }
     ]
