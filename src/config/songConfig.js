@@ -121,7 +121,39 @@ export const MUSIC_LIST = [
     type:"stefanie"
   },
   {
-    id:16,
+		id: 16,
+		title: "第一天",
+		artist: "孙燕姿",
+    file: "http://other.web.ri01.sycdn.kuwo.cn/resource/n1/32/5/384823825.mp3",
+    cover : "stefanie.jpg",
+    type:"stefanie"
+  },
+  {
+		id: 17,
+		title: "我不难过",
+		artist: "孙燕姿",
+    file: "http://other.web.ri01.sycdn.kuwo.cn/resource/n2/64/8/3847066333.mp3",
+    cover : "stefanie.jpg",
+    type:"stefanie"
+  },
+  {
+		id: 18,
+		title: "雨天",
+		artist: "孙燕姿",
+    file: "http://172.20.248.105/IXCd2a21234004f27fdbf04fc797c2ebeda_10.16.113.94/resource/n3/9/89/3228705897.mp3",
+    cover : "stefanie.jpg",
+    type:"stefanie"
+  },
+  {
+		id: 19,
+		title: "无限大",
+		artist: "孙燕姿",
+    file: "http://other.web.rh01.sycdn.kuwo.cn/resource/n3/71/23/611113085.mp3",
+    cover : "stefanie.jpg",
+    type:"stefanie"
+  },
+  {
+    id:20,
     title:"see you again",
     artist:"Wiz Khalifa",
     file:"http://other.web.rh01.sycdn.kuwo.cn/resource/n3/61/32/2047012456.mp3",
@@ -129,7 +161,7 @@ export const MUSIC_LIST = [
     type:"europe"
   },
   {
-    id:17,
+    id:21,
     title:"nothing on you",
     artist:"邓福如",
     file:"http://other.web.ra01.sycdn.kuwo.cn/resource/n1/2011/06/14/2055048587.mp3",
@@ -137,7 +169,7 @@ export const MUSIC_LIST = [
     type:"europe"
   },
   {
-    id:18,
+    id:22,
     title:"I really like you",
     artist:"Carly Rae Jepen",
     file:"http://other.web.rh01.sycdn.kuwo.cn/resource/n1/17/74/2091894354.mp3",
@@ -145,7 +177,7 @@ export const MUSIC_LIST = [
     type:"europe"
   },
   {
-    id:19,
+    id:23,
     title:"love story",
     artist:"taylor swift",
     file:"http://other.web.ri01.sycdn.kuwo.cn/resource/n2/88/34/3059849706.mp3",
@@ -153,7 +185,7 @@ export const MUSIC_LIST = [
     type:"europe"
   },
   {
-    id:20,
+    id:24,
     title:"钟无艳",
     artist:"谢安琪",
     file:"http://other.web.ra01.sycdn.kuwo.cn/resource/n1/128/37/81/3587394568.mp3",
@@ -161,7 +193,7 @@ export const MUSIC_LIST = [
     type:"yueyu"
   },
   {
-    id:21,
+    id:25,
     title:"风的季节",
     artist:"Soler",
     file:"http://other.web.ri01.sycdn.kuwo.cn/resource/n3/10/8/3691863218.mp3",

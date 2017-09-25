@@ -10,6 +10,8 @@ import MusicListContent from "./musicListContent.js";
 import {MUSIC_LIST} from "../config/songConfig.js";
 import {Router,IndexRoute,Route,hashHistory} from "react-router";
 import Pubsub from "pubsub-js";
+import { CSSTransitionGroup } from "react-transition-group"; //v1
+
 let lastRunTime = new Date();
 let interval = null;
 class AppComponent extends React.Component {
@@ -136,6 +138,8 @@ class AppComponent extends React.Component {
       _this.playNext();
     });
 
+    // 浏览器下拉露出地址来源
+
   }
 
   componentWillUnmount(){
@@ -167,6 +171,14 @@ class AppComponent extends React.Component {
         {/* 这种方式不会把参数传递给子组件 */}
         {/* {this.props.children} */}
         {/* 这样会把state里面的东西作为参数传递给子组件，这就要求state的属性名和子组件的prop属性名相同 */}
+        {/* <CSSTransitionGroup
+            transitionName="example"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={500}>
+            <div key={this.props.location.pathname} className="wrap">
+              {React.cloneElement(this.props.children,this.state)}
+            </div>
+        </CSSTransitionGroup> */}
         {React.cloneElement(this.props.children,this.state)}
       </div>
     );

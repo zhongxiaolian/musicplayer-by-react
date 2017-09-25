@@ -53,9 +53,12 @@
     }
   }
   .music-right{
+    box-sizing: border-box;
     flex: auto;
     height: 100%;
-    overflow: scroll;
+    overflow-y: scroll;
+    border: 10px solid #ccc;
+    border-image: url("../images/border.png") 20 repeat;
   }
 }
 @media screen and(max-width:768px){
@@ -75,5 +78,27 @@
     .music-right{
 
     }
+  }
+}
+
+
+// 转场过度样式
+.example-enter {
+  opacity: 0.01;
+  transform: translate3D(100%, 0, 0);
+  transition: all 500ms linear;
+  &.example-enter-active{
+    opacity: 1;
+    transform: translate3D(0, 0, 0);
+  }
+}
+
+.example-leave {
+  opacity: 1;
+  transform: translate3D(0, 0, 0);
+  transition: all 500ms linear;
+  &.example-leave-active{
+    opacity: 0.01;
+    transform: translate3D(-100%, 0, 0);
   }
 }

@@ -30,32 +30,54 @@ export default class MusicListContent extends Component{
   }
 
   componentDidMount(){
-    // let musicContent = this.refs.musicContent;
-    // let musicContentHeight = musicContent.offsetHeight;
-    // let musicContentParentHeight = musicContent.parentElement.offsetHeight;
-    // let startY = 0;
-    // let moveY = 0;
-    // let maxDistance = 200;
-    // let totalMove = 0;
-    // musicContent.addEventListener("touchstart",function(e){
-    //   startY = e.touches[0].clientY;
-    // })
-    // musicContent.addEventListener("touchmove",function(e){
-    //   moveY = e.touches[0].clientY-startY;
-    //   console.log(moveY);
-    //   console.log(totalMove + moveY);
-    //   if(totalMove+moveY>(musicContentHeight-musicContentParentHeight)+maxDistance){
-    //     totalMove = (musicContentHeight-musicContentParentHeight)+maxDistance;
-    //   }else if(totalMove+moveY<-(maxDistance)){
-    //     totalMove = -(maxDistance);
-    //   }else{
-    //   }
-    //   musicContent.style.transform = "translateY("+(totalMove + moveY)+"px)";
-    // })
-    // musicContent.addEventListener("touchend",function(e){
-    //   totalMove = totalMove + moveY;
-
-    // })
+    // 防止微信下拉显示网址来源
+    document.addEventListener("touchmove",function(e){
+      e.preventDefault();
+    })
+    let musicContent = this.refs.musicContent;
+    let musicContentHeight = musicContent.offsetHeight;
+    let musicContentParent = musicContent.parentElement;
+    //20是给父盒子加的边框
+    let musicContentParentHeight = musicContent.parentElement.offsetHeight-20;
+    let startY = 0;
+    let moveY = 0;
+    let maxDistance = 100;
+    let totalMove = 0;
+    let goTop = 0;
+    let goBottom = -(musicContentHeight-musicContentParentHeight);
+    musicContentParent.addEventListener("touchstart",function(e){
+      startY = e.touches[0].clientY;
+    })
+    musicContentParent.addEventListener("touchmove",function(e){
+      //移动的过程中关闭过度效果，否则滑动不流畅
+      musicContent.style.transition = "";
+      moveY = e.touches[0].clientY-startY;
+      //手指向下滑动，超出最大临界值
+      if(totalMove+moveY>maxDistance){
+        totalMove = maxDistance;
+        musicContent.style.transform = "translateY(" +(totalMove)+"px)";
+        return;
+      }
+      //手指向上滑动超出最大临界值
+      else if(Math.abs(totalMove+moveY)>(musicContentHeight-musicContentParentHeight+maxDistance)){
+        totalMove = -(musicContentHeight-musicContentParentHeight+maxDistance);
+        musicContent.style.transform = "translateY(" +(totalMove)+"px)";
+        return;
+      }else{
+        musicContent.style.transform = "translateY(" +(totalMove+moveY)+"px)";
+      }
+    })
+    musicContentParent.addEventListener("touchend",function(e){
+      totalMove = totalMove + moveY;
+      if(totalMove>goTop){
+        totalMove = goTop;
+      }else if(totalMove<goBottom){
+        totalMove = goBottom;
+      }
+      //开启过度效果，使列表吸附回去。
+      musicContent.style.transition = "all .5s";
+      musicContent.style.transform = "translateY(" +(totalMove)+"px)";
+    })
   }
 
   render(){
