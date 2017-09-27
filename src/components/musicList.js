@@ -31,7 +31,7 @@ class MusicList extends React.Component{
               transitionEnterTimeout={500}
               transitionLeaveTimeout={500}>
               <div key={this.props.location.pathname} className="wrap">
-                {React.cloneElement(this.props.children,this.state)}
+                {this.props.children}
               </div>
           </CSSTransitionGroup> */}
           {this.props.children}

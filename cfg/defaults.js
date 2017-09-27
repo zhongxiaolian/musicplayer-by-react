@@ -7,7 +7,7 @@
 'use strict';
 
 const path = require('path');
-const srcPath = path.join(__dirname, '/../src');
+const srcPath = path.join(__dirname, "/../src");
 const dfltPort = 8000;
 /**
  * Get the default modules object for webpack

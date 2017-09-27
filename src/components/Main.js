@@ -110,6 +110,14 @@ class AppComponent extends React.Component {
   }
 
   componentDidMount(){
+    // 防止微信下拉显示网址来源
+    document.addEventListener("touchmove",function(e){
+      if(e.cancelable){
+        if (!event.defaultPrevented) {
+          event.preventDefault();
+        }
+      }
+    })
     this.rollTitle();
     let _this = this;
     //组件加载完毕播放歌曲，放在根节点这样切换组件歌曲不会停止播放
