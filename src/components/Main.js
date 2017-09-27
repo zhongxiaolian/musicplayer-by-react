@@ -110,14 +110,12 @@ class AppComponent extends React.Component {
   }
 
   componentDidMount(){
-    // 防止微信下拉显示网址来源
-    document.addEventListener("touchmove",function(e){
-      if(e.cancelable){
-        if (!event.defaultPrevented) {
-          event.preventDefault();
-        }
-      }
-    })
+    // 防止微信下拉显示网址来源。第三个参数是一个对象，false会提前告知浏览器我会阻止浏览器默认行为，true表示
+    //我不会阻止浏览器的默认行为，这样可以提高滚动的性能（该选项默认为true，表示告诉浏览器不会阻止默认行为）。
+    document.addEventListener("touchmove",function(event){
+      event.preventDefault();
+    },{ passive: false});
+
     this.rollTitle();
     let _this = this;
     //组件加载完毕播放歌曲，放在根节点这样切换组件歌曲不会停止播放
@@ -167,10 +165,6 @@ class AppComponent extends React.Component {
   }
 
   render() {
-    // if(interval){
-    //   clearInterval(interval);
-    // }
-    // this.rollTitle();
     return (
       <div className="component-main">
         <Header ref="header"/>

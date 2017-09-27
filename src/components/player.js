@@ -157,6 +157,7 @@ class Player extends React.Component{
                     <Progress
                       progress={this.state.volume}
                       onProgressChange={this.volumeChangeHandler.bind(this)}
+                      pointer={false}
                       barColor="#aaa"
                     >
                     </Progress>
@@ -169,6 +170,7 @@ class Player extends React.Component{
                   cn="mt20"
                   progress={this.state.progress}
                   onProgressChange={this.progressChangeHandler.bind(this)}
+                  pointer={true}
                 >
                 </Progress>
               </div>

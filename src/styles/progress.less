@@ -3,9 +3,27 @@
   height: 4px;
   background-color: #ddd;
   cursor: pointer;
+  display: flex;
   .progress{
     width: 10%;
     height: 4px;
     background-color: #2f9842;
+  }
+  .pointer{
+    width: 14px;
+    height: 14px;
+    margin-top: -6px;
+    border-radius: 50%;
+    border:1px solid red;
+    position: relative;
+    span{
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      background-color: red;
+      position: absolute;
+      left:6px;
+      top: 6px;
+    }
   }
 }
