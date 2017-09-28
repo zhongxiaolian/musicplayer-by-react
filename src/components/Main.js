@@ -123,8 +123,11 @@ class AppComponent extends React.Component {
       supplied : "mp3",
       wmode : "window"
     })
-    this.playMusic(this.state.currentMusicItem);
-    $("#player").jPlayer("play");
+    //移动端默认不让播放器自动播放，减少不必要的流量浪费。
+    $("#player").jPlayer("setMedia",{
+      mp3 : this.state.currentMusicItem.file
+    });
+    // this.playMusic(this.state.currentMusicItem);
 
     // 事件订阅，接收事件
     Pubsub.subscribe("PLAY_MUSIC",(message,item)=>{

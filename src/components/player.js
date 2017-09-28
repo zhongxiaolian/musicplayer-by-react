@@ -16,7 +16,7 @@ class Player extends React.Component{
     this.state = {
       progress : 0,
       volume : 0,
-      isPlay : true,
+      isPlay : false,
       leftTime : 0
     }
   }
