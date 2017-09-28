@@ -40,13 +40,13 @@ export default class MusicListContent extends Component{
       content.style.transform = "translateY("+0+"px)";
     }
   }
-  shouldComponentUpdate(){
-    console.log("shouldComponentUpdate");
-    if(this.props.location.action == "PUSH"){
-      return false;
-    }
-    return true;
-  }
+  // shouldComponentUpdate(){
+  //   console.log("shouldComponentUpdate");
+  //   if(this.props.location.action == "PUSH"){
+  //     return false;
+  //   }
+  //   return true;
+  // }
 
   componentDidUpdate(){
     console.log("componentDidUpdate");

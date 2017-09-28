@@ -11,8 +11,8 @@ const open = require('open');
  * @type {boolean}
  */
 let isInitialCompilation = true;
-// let ip = "192.168.1.102";
-let ip = "localhost";
+let ip = "192.168.1.102";
+// let ip = "localhost";
 const compiler = webpack(config);
 
 new WebpackDevServer(compiler, config.devServer)

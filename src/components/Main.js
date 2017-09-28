@@ -124,6 +124,7 @@ class AppComponent extends React.Component {
       wmode : "window"
     })
     this.playMusic(this.state.currentMusicItem);
+    $("#player").jPlayer("play");
 
     // 事件订阅，接收事件
     Pubsub.subscribe("PLAY_MUSIC",(message,item)=>{
