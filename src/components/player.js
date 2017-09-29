@@ -68,12 +68,14 @@ class Player extends React.Component{
 
   //通过回调函数接收progress子组件传递的值,实现点击progressbar控制播放进度
   progressChangeHandler(progress){
+    console.log(this);
     //更改音乐的播放进度也会触发$.jPlayer.event.timeupdate事件，从而实现progress值的更改。
     $("#player").jPlayer("play",duration*progress);
   }
 
   //通过回调函数接收progress子组件传递的值，来控制音量。
   volumeChangeHandler(progress){
+
     $("#player").jPlayer("volume",progress)
     this.setState({
       volume : progress*100

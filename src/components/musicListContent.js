@@ -117,13 +117,25 @@ export default class MusicListContent extends Component{
     content.removeEventListener("touchend",null);
   }
   // 通过回调函数，点击删除按钮删除条目
+  // deleteMusic(item){
+  //   let list = this.state.musicList.filter(function(i){
+  //     return i !== item;
+  //   });
+  //   this.setState({
+  //     musicList : list
+  //   });
+  // }
+  //通过闭包实现参数传递
   deleteMusic(item){
-    let list = this.state.musicList.filter(function(i){
-      return i !== item;
-    });
-    this.setState({
-      musicList : list
-    });
+    let _this = this;
+    return function(){
+      let list = _this.state.musicList.filter(function(i){
+        return i !== item;
+      });
+      _this.setState({
+        musicList : list
+      });
+    }
   }
   render(){
     var _this = this;
@@ -134,7 +146,7 @@ export default class MusicListContent extends Component{
       listEle = this.state.musicList.map(function(item){
         // 通过context获取父组件的值
         return <MusicListItem musicItem={item} focus={item == _this.context.currentMusicItem} key={item.id}
-        delete={_this.deleteMusic.bind(_this)}/>
+        delete={_this.deleteMusic(item)}/>
       });
     }
     return (
