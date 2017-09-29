@@ -16,8 +16,8 @@ class Player extends React.Component{
     this.state = {
       progress : 0,
       volume : 0,
-      isPlay : false,
-      leftTime : 0
+      leftTime : 0,
+      isPlay :this.props.playerIsPlay
     }
   }
 
@@ -55,6 +55,13 @@ class Player extends React.Component{
       }else if(e.keyCode==40){
         _this.playNext();
       }
+    })
+
+    Pubsub.subscribe("PLAY_ITEM",()=>{
+      console.log("play_item");
+      _this.setState({
+        isPlay : true
+      })
     })
   }
 
@@ -141,11 +148,18 @@ class Player extends React.Component{
       });
     }
   }
+  toMusicList(e){
+    e.preventDefault();
+    //player组件销毁之前保存player的播放状态（保证路由切回来时，前后状态保持一致）。
+    Pubsub.publish("SAVE_PLAYER_STATE",this.state.isPlay);
+    this.context.router.push("/list");
+  }
+
   render() {
     let coverUrl = require("../images/"+this.props.currentMusicItem.cover);
     return (
       <div className="player-page">
-          <h1 className="caption"><div><Link to="/list">我的私人歌单 &gt;</Link></div></h1>
+          <h1 className="caption"><div><a href="#" id="songs" onClick={this.toMusicList.bind(this)}>我的私人歌单 &gt;</a></div></h1>
           <div className="mt20 row">
             <div className="controll-wrapper">
               <h2 className="music-title">{this.props.currentMusicItem.title}</h2>
@@ -195,5 +209,8 @@ class Player extends React.Component{
       </div>
     );
   }
+}
+Player.contextTypes = {
+  router : React.PropTypes.object
 }
 export default Player;

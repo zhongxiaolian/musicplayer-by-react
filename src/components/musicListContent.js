@@ -116,6 +116,7 @@ export default class MusicListContent extends Component{
     content.removeEventListener("touchmove",null);
     content.removeEventListener("touchend",null);
   }
+
   // 通过回调函数，点击删除按钮删除条目
   // deleteMusic(item){
   //   let list = this.state.musicList.filter(function(i){

@@ -20,7 +20,10 @@ class AppComponent extends React.Component {
     this.state = {
       musicList : MUSIC_LIST,
       currentMusicItem : MUSIC_LIST[0],
-      repeatType : "cycle"
+      repeatType : "cycle",
+      //playerIsPlay属性记录play组件的播放状态，这个属性作为list组件和player组件通信的桥梁，
+      //从而处理了player组件播放按钮，切换路由后，显示错误的bug。
+      playerIsPlay : false
     };
   }
   playMusic(item){
@@ -131,6 +134,10 @@ class AppComponent extends React.Component {
 
     // 事件订阅，接收事件
     Pubsub.subscribe("PLAY_MUSIC",(message,item)=>{
+      //更改player页面的播放按钮的状态
+      _this.setState({
+        playerIsPlay : true
+      })
       _this.playMusic(item);
     })
     Pubsub.subscribe("PLAY_PREV",()=>{
@@ -141,6 +148,12 @@ class AppComponent extends React.Component {
     })
     Pubsub.subscribe("CHANGE_REPEATTYPE",(message,type)=>{
       _this.changeRepeatType(type);
+    })
+    //在页面跳转之前保存player的播放状态值
+    Pubsub.subscribe("SAVE_PLAYER_STATE",(message,state)=>{
+      _this.setState({
+        playerIsPlay : state
+      })
     })
 
     //监听歌曲播放完毕事件
@@ -158,6 +171,7 @@ class AppComponent extends React.Component {
     Pubsub.unsubscribe("PLAY_PREV");
     Pubsub.unsubscribe("PLAY_NEXT");
     Pubsub.unsubscribe("CHANGE_REPEATTYPE");
+    Pubsub.unsubscribe("SAVE_PLAYER_STATE");
     //解绑
     $("#player").unbind($.jPlayer.event.ended);
   }
